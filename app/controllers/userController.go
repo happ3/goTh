@@ -21,6 +21,11 @@ import (
 
 const jwtSecret = "ADjhjkdsfSFjhdskjf2432rf"
 
+// @title 博客API文档
+// @version 1.0
+// @description 博客系统的API接口文档
+// @host localhost:8080
+// @BasePath /api/v1
 type UserController struct {
 }
 
@@ -34,18 +39,31 @@ func (UserController) GetUserInfo(c *gin.Context) {
 	response.SuccessData(c, user)
 }
 
-/*
-*
-1，判断用户是否存在
-2，判断用户名密码是否正确
-3，加入到session中
-*/
+// @登录
+// @Summary 登录
+// @Tags user
+// @Description login
+// @Accept multipart/form-data
+// @Produce json
+// @Param   username     formData    string     true        "username"
+// @Param   password     formData    string     true        "password"
+// @Success 200 {string} string	"ok"
+// @Router /user/login [post]
 func (UserController) Login(c *gin.Context) {
 	//user, err := reuqest.GetJsonToObj[models.User](c)
 	var user models.User
 	err := c.ShouldBind(&user)
 	if err != nil {
 		response.FailMsg(c, "数据解析失败")
+		return
+	}
+	if len(user.Username) == 0 {
+		response.FailMsg(c, "用户名不能为空")
+		return
+	}
+	if len(user.Password) == 0 {
+		response.FailMsg(c, "密码不能为空")
+		return
 	}
 	service.GteUserInfo(&user)
 	if user.Id == 0 {

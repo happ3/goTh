@@ -1,9 +1,10 @@
 package reuqest
 
 import (
+	"io"
+
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
-	"io"
 )
 
 //func GetJson(c *gin.Context) (map[string]interface{}, error) {
@@ -27,6 +28,9 @@ func GetJsonToObj[T any](ctx *gin.Context) (T, error) {
 		return zero, err
 	}
 	var t T
+	if len(data) == 0 {
+		return t, nil
+	}
 	err = json.Unmarshal(data, &t)
 	if err != nil {
 		return t, err

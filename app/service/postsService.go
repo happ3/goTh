@@ -1,10 +1,36 @@
 package service
 
 import (
+	"goTh/app/common"
+	"goTh/app/dto"
 	"goTh/app/models"
 	"goTh/mysqlConfig"
 	"goTh/util"
+
+	"gorm.io/gorm"
 )
+
+func PagePost(postsDto dto.PostsDto, offset int, pageSize int) common.PageResp {
+	var posts []models.Post
+	var total int64
+
+	mysqlConfig.DB.Scopes(buildQuery(postsDto)).Model(&models.Post{}).Count(&total)
+	mysqlConfig.DB.Scopes(buildQuery(postsDto)).Model(&models.Post{}).Offset(offset).Limit(pageSize).Find(&posts)
+	return common.PageResp{}.PageResult(offset, pageSize, total, posts)
+
+}
+
+func buildQuery(postsDto dto.PostsDto) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+		if len(postsDto.Content) != 0 {
+			db = db.Where("content = ?", postsDto.Content)
+		}
+		if len(postsDto.Title) != 0 {
+			db = db.Where("title LIKE ?", "%"+postsDto.Title+"%")
+		}
+		return db
+	}
+}
 
 /*
 *

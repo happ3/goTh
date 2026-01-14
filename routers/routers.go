@@ -26,6 +26,7 @@ func RouterInit(r *gin.Engine) {
 
 	postsGroup := r.Group("/posts", middlewares.AuthMiddleware)
 	{
+		postsGroup.POST("/pagePost", controllers.PostsController{}.PagePost)
 		postsGroup.POST("/addPosts", controllers.PostsController{}.AddPosts)
 		postsGroup.POST("/getPosts", controllers.PostsController{}.GetPosts)
 		postsGroup.POST("/updatePost", controllers.PostsController{}.UpdatePost)

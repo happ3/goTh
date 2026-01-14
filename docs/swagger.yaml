@@ -1,0 +1,61 @@
+info:
+  contact: {}
+paths:
+  /AddPosts:
+    post:
+      consumes:
+      - application/json
+      description: AddPosts
+      parameters:
+      - description: Title
+        in: path
+        name: Title
+        required: true
+        type: string
+      - description: Content
+        in: path
+        name: Content
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 新增博客
+      tags:
+      - user
+  /user/login:
+    post:
+      consumes:
+      - multipart/form-data
+      description: login
+      parameters:
+      - description: username
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: password
+        in: formData
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 登录
+      tags:
+      - user
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
