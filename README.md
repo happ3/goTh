@@ -11,6 +11,7 @@
 ```
 查询用户信息
 curl --location --request GET 'http://localhost:8080/user/userInfo?id=1' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VyX25hbWUiOiJoYXBwMyIsImV4cCI6MTc2ODM4ODI1OCwiaWF0IjoxNzY4Mzg3MzU4fQ.01ohQ1jKE2K2AUZ_tk6NkHccxl2T0oRSEFc75JuQBzk' \
 --data-raw ''
 
 注册用户
@@ -43,6 +44,7 @@ curl --location --request POST 'http://localhost:8080/user/refreshToken' \
 
 用户认证
 curl --location --request POST 'http://localhost:8080/user/authentication' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VyX25hbWUiOiJoYXBwMyIsImV4cCI6MTc2ODM4ODI1OCwiaWF0IjoxNzY4Mzg3MzU4fQ.01ohQ1jKE2K2AUZ_tk6NkHccxl2T0oRSEFc75JuQBzk' \
 --header 'Content-Type: application/json' \
 --data-raw '{"id":3}
 '

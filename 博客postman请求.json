@@ -12,7 +12,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VyX25hbWUiOiJoYXBwMyIsImV4cCI6MTc2ODM4ODI1OCwiaWF0IjoxNzY4Mzg3MzU4fQ.01ohQ1jKE2K2AUZ_tk6NkHccxl2T0oRSEFc75JuQBzk",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -47,7 +53,13 @@
 			"name": "认证",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VyX25hbWUiOiJoYXBwMyIsImV4cCI6MTc2ODM4ODI1OCwiaWF0IjoxNzY4Mzg3MzU4fQ.01ohQ1jKE2K2AUZ_tk6NkHccxl2T0oRSEFc75JuQBzk",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\"id\":3}\r\n",
