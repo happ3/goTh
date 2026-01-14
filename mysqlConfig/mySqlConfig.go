@@ -31,5 +31,5 @@ func InitMysql() {
 	if err != nil {
 		panic("❌ 数据库连接失败: " + err.Error()) // 直接 crash，避免后续 nil 使用
 	}
-	fmt.Println("✅ 数据库连接成功!")
+	fmt.Println("✅ 数据库mysql连接成功!")
 }
