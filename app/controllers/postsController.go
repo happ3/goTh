@@ -38,6 +38,14 @@ func (PostsController) PagePost(c *gin.Context) {
 	response.SuccessData(c, pageResp)
 }
 
+func (PostsController) NewPagePost(c *gin.Context) {
+	postsDto, _ := reuqest.GetJsonToObj[dto.PostsDto](c)
+	paging := &dto.Paging{Page: (postsDto.Page), PageSize: (postsDto.PageSize)}
+	paging.GetPages()
+	pageResp := service.NewPagePost(postsDto, paging)
+	response.SuccessData(c, pageResp)
+}
+
 // @新增博客
 // @Summary 新增博客
 // @Tags user

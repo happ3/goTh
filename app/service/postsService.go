@@ -20,6 +20,15 @@ func PagePost(postsDto dto.PostsDto, offset int, pageSize int) common.PageResp {
 
 }
 
+func NewPagePost(postsDto dto.PostsDto, paging *dto.Paging) common.PageResp {
+	var posts []models.Post
+	var total int64
+
+	mysqlConfig.DB.Scopes(buildQuery(postsDto)).Model(&models.Post{}).Count(&total)
+	mysqlConfig.DB.Scopes(buildQuery(postsDto)).Model(&models.Post{}).Offset(paging.Offset).Limit(paging.PageSize).Find(&posts)
+	return common.PageResp{}.PageResult(paging.Offset, paging.PageSize, total, posts)
+}
+
 func buildQuery(postsDto dto.PostsDto) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(postsDto.Content) != 0 {
