@@ -21,6 +21,7 @@ func GetJson(ctx *gin.Context) (map[string]interface{}, error) {
 	return maps, err
 }
 
+// 数据绑定到结构体上
 func GetJsonToObj[T any](ctx *gin.Context) (T, error) {
 	data, err := io.ReadAll(ctx.Request.Body)
 	if err != nil {
