@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"goTh/app/dto"
 	"goTh/app/models"
 	"goTh/app/models/response"
@@ -21,9 +22,13 @@ type PostsController struct {
 	BaseController
 }
 
-func (PostsController) PagePost(c *gin.Context) {
-	d := PostsController{BaseController{}}
-	offset, pageSize, err := d.CalculatePagination(c)
+func (postsController PostsController) PagePost(c *gin.Context) {
+	value, exists := c.Get("testName")
+	if exists {
+		fmt.Printf("中间件值为%v\n", value)
+	}
+
+	offset, pageSize, err := postsController.CalculatePagination(c)
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
 		return
@@ -38,6 +43,10 @@ func (PostsController) PagePost(c *gin.Context) {
 	response.SuccessData(c, pageResp)
 }
 
+/*
+*
+分页新写法
+*/
 func (PostsController) NewPagePost(c *gin.Context) {
 	postsDto, _ := reuqest.GetJsonToObj[dto.PostsDto](c)
 	paging := &dto.Paging{Page: (postsDto.Page), PageSize: (postsDto.PageSize)}

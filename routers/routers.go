@@ -18,15 +18,16 @@ func RouterInit(r *gin.Engine) {
 		userGroup.GET("/userInfo", middlewares.AuthMiddleware, controllers.UserController{}.GetUserInfo)
 	}
 
-	commentsGroup := r.Group("/comments", middlewares.AuthMiddleware)
+	commentsGroup := r.Group("/comments")
+	commentsGroup.Use(middlewares.AuthMiddleware) //配置中间件
 	{
 		commentsGroup.POST("/addComments", controllers.CommentsController{}.AddComments)
 		commentsGroup.POST("/findCommentByPostId", controllers.CommentsController{}.FindCommentByPostId)
 	}
 
-	postsGroup := r.Group("/posts", middlewares.AuthMiddleware)
+	postsGroup := r.Group("/posts", middlewares.AuthMiddleware) //配置中间件
 	{
-		postsGroup.POST("/pagePost", controllers.PostsController{}.NewPagePost)
+		postsGroup.POST("/pagePost", controllers.PostsController{}.PagePost)
 		postsGroup.POST("/addPosts", controllers.PostsController{}.AddPosts)
 		postsGroup.POST("/getPosts", controllers.PostsController{}.GetPosts)
 		postsGroup.POST("/updatePost", controllers.PostsController{}.UpdatePost)

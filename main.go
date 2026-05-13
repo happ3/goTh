@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
+	"goTh/app/middlewares"
 	_ "goTh/docs"
 	"goTh/goRedis"
 	"goTh/mysqlConfig"
@@ -21,6 +22,7 @@ func main() {
 
 	//store := cookie.NewStore([]byte("secret"))
 	//r.Use(sessions.Sessions("session", store))
+	r.Use(middlewares.InitMiddle, middlewares.InitMiddle2)
 
 	routers.RouterInit(r)
 
